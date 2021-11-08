@@ -65,6 +65,14 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.4.0"
     implementation "androidx.activity:activity-ktx:1.4.0"
 
+
+    //Paging
+    implementation "androidx.paging:paging-runtime-ktx:3.1.0-rc01"
+
+    //coil
+    implementation("io.coil-kt:coil:1.4.0")
+
+
 }
 
 
