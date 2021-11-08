@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Safwat/AndroidStudioProjects/MyRadio/app/src/main/res/layout/activity_main.xml" value="0.1015625" />
+        <entry key="..\:/Users/Safwat/AndroidStudioProjects/MyRadio/app/src/main/res/layout/fragment_channel.xml" value="0.22083333333333333" />
         <entry key="..\:/Users/Safwat/AndroidStudioProjects/MyRadio/app/src/main/res/layout/recycler_radio_item.xml" value="0.22083333333333333" />
       </map>
     </option>
