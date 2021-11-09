@@ -6,11 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.viewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.myradio.R
 import com.myradio.databinding.FragmentChannelBinding
 import com.myradio.features.player.ui.adpters.RadioChannelsAdapter
 import com.myradio.features.player.viewmdoel.RadioChannelsViewModel
@@ -19,7 +17,6 @@ import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-@InternalCoroutinesApi
 @AndroidEntryPoint
 class ChannelFragment : Fragment() {
     private val TAG = "ChannelFragment"
@@ -61,8 +58,19 @@ class ChannelFragment : Fragment() {
             }
         }
     }
+
     private fun playRadioChannel(pos: Int) {
-        TODO()
+
+        val currImg = radioAdapter.snapshot()[pos]?.image_url
+        val currName = radioAdapter.snapshot()[pos]?.name
+        val currUri = radioAdapter.snapshot()[pos]?.uri
+        binding.minPlayer.getData(
+            curChannelImage = currImg,
+            curChannelName = currName,
+            curChannelUri = currUri
+
+        )
+        Log.d(TAG, "CLICKED")
     }
 }
 

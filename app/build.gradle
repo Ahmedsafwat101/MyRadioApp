@@ -82,6 +82,9 @@ dependencies {
     // Feature module Support
     implementation("androidx.navigation:navigation-dynamic-features-fragment:2.3.5")
 
+    //ExoPlayer
+    implementation 'com.google.android.exoplayer:exoplayer:2.16.0'
+
 }
 
 

@@ -38,8 +38,6 @@ class RadioChannelsAdapter(val playRadioChannel: (Int) -> Unit) : PagingDataAdap
                 crossfade(true)
                 crossfade(100)
             }
-
-
         }
 
         holder.itemView.setOnClickListener{
