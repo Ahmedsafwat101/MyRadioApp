@@ -13,7 +13,6 @@ import com.myradio.databinding.FragmentChannelBinding
 import com.myradio.features.player.ui.adpters.RadioChannelsAdapter
 import com.myradio.features.player.viewmdoel.RadioChannelsViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
@@ -64,12 +63,11 @@ class ChannelFragment : Fragment() {
         val currImg = radioAdapter.snapshot()[pos]?.image_url
         val currName = radioAdapter.snapshot()[pos]?.name
         val currUri = radioAdapter.snapshot()[pos]?.uri
+
         binding.minPlayer.getData(
             curChannelImage = currImg,
             curChannelName = currName,
-            curChannelUri = currUri
-
-        )
+            curChannelUri = currUri)
         Log.d(TAG, "CLICKED")
     }
 }

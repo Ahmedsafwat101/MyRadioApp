@@ -11,12 +11,9 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.MyRadio">
-        <activity
-            android:name=".MainActivity2"
-            android:exported="true">
-
-        </activity>
+        android:usesCleartextTraffic="true"
+        android:theme="@style/Theme.MyRadio"
+        >
         <activity
             android:name=".MainActivity"
             android:exported="true">
