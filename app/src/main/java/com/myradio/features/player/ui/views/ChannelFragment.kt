@@ -18,6 +18,7 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class ChannelFragment : Fragment() {
+
     private val TAG = "ChannelFragment"
     private lateinit var binding: FragmentChannelBinding
 
@@ -35,6 +36,13 @@ class ChannelFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setUpRecyclerView()
+
+        binding.minPlayer.playOrPauseBtn.setOnClickListener {
+            binding.minPlayer.playOrPause()
+        }
+
+
+
     }
 
     private fun setUpRecyclerView() {

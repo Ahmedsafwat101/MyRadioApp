@@ -34,6 +34,7 @@
         android:layout_height="22dp"
         android:maxLength="10"
         android:maxLines="1"
+        android:text="xxxxxxxxxxxx"
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/exo_pause"
@@ -49,9 +50,9 @@
         android:background="@color/white"
         android:clickable="true"
         android:scaleType="centerCrop"
-        android:src="@drawable/pause"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:focusable="true" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

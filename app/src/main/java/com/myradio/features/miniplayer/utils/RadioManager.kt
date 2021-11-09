@@ -1,8 +1,6 @@
 package com.myradio.features.miniplayer.utils
 
-import android.content.Context
 import android.text.TextUtils
-import android.util.Log
 import com.google.android.exoplayer2.*
 import com.google.android.exoplayer2.source.BaseMediaSource
 import com.google.android.exoplayer2.source.ProgressiveMediaSource
@@ -12,16 +10,15 @@ import com.google.android.exoplayer2.source.rtsp.RtspMediaSource
 import com.google.android.exoplayer2.source.smoothstreaming.SsMediaSource
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
 import com.google.android.exoplayer2.util.Util
-import javax.inject.Inject
 
 private const val TAG = "RadioManager"
 
-class RadioManager (val player: ExoPlayer) {
+class RadioManager(val player: ExoPlayer) {
 
 
-    private val playbackStateListener: Player.Listener = playbackStateListener()
+    private val playbackStateListener: Player.Listener = PlayerListener()
 
-    fun initializePlayer(uri: String, context: Context) {
+    fun initializePlayer(uri: String) {
 
         val mediaItem = MediaItem.Builder()
             .setUri(uri)
@@ -31,7 +28,7 @@ class RadioManager (val player: ExoPlayer) {
             DefaultHttpDataSource.Factory().setAllowCrossProtocolRedirects(true)
 
         //get media type
-        val currMediaSource = getMediaType(uri,httpDataSourceFactory,mediaItem)
+        val currMediaSource = getMediaType(uri, httpDataSourceFactory, mediaItem)
 
         player.setMediaSource(currMediaSource)
         player.addListener(playbackStateListener)
@@ -41,26 +38,6 @@ class RadioManager (val player: ExoPlayer) {
         player.prepare()
     }
 
-    private fun playbackStateListener() = object : Player.Listener {
-        override fun onPlaybackStateChanged(playbackState: Int) {
-            when (playbackState) {
-                ExoPlayer.EVENT_PLAYER_ERROR -> {
-                    Log.d(TAG, "ExoPlayer.Error -")
-                }
-                ExoPlayer.STATE_IDLE -> {
-                    Log.d(TAG, "ExoPlayer.STATE_IDLE      -")
-                }
-                ExoPlayer.STATE_BUFFERING -> {
-                    Log.d(TAG, "ExoPlayer.STATE_BUFFERING -")
-                }
-                ExoPlayer.STATE_READY -> {
-                    Log.d(TAG, "ExoPlayer.STATE_READY     -")
-                }
-                ExoPlayer.STATE_ENDED -> Log.d(TAG, "UNKNOWN_STATE             -")
-                else -> Log.d(TAG, "UNKNOWN_STATE             -")
-            }
-        }
-    }
 
     fun play() {
         player.playWhenReady = true
