@@ -6,6 +6,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".features.player.ui.views.ChannelFragment">
 
+
+    <ProgressBar
+        android:id="@+id/progress_circular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:translationZ="180dp"
+        android:visibility="gone"/>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -31,6 +40,7 @@
             android:elevation="50dp"
             app:strokeColor="@color/black"
             app:strokeWidth="2dp"
+            android:visibility="gone"
             >
 
             <com.myradio.features.miniplayer.ui.views.MiniPlayer

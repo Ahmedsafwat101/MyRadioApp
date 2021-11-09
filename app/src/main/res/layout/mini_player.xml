@@ -7,8 +7,8 @@
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/channelImg"
-        android:layout_width="85dp"
-        android:layout_height="90dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,21 +26,6 @@
         app:layout_constraintEnd_toStartOf="@+id/exo_pause"
         app:layout_constraintStart_toEndOf="@+id/channelImg"
         app:layout_constraintTop_toTopOf="parent" />
-
-
-    <TextView
-        android:id="@+id/statusTxt"
-        android:layout_width="wrap_content"
-        android:layout_height="22dp"
-        android:maxLength="10"
-        android:maxLines="1"
-        android:text="xxxxxxxxxxxx"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/exo_pause"
-        app:layout_constraintStart_toEndOf="@+id/channelImg"
-        app:layout_constraintTop_toBottomOf="@+id/channelNameTxt" />
-
 
     <ImageButton
         android:id="@id/exo_pause"

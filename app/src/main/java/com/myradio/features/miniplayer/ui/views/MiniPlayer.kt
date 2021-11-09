@@ -9,7 +9,6 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import coil.load
 import com.myradio.R
 import com.myradio.databinding.MiniPlayerBinding
-import com.myradio.features.miniplayer.utils.RadioManager
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -23,8 +22,7 @@ class MiniPlayer@JvmOverloads constructor(
 ):ConstraintLayout(context, attrs, defStyleAttr) {
 
 
-    @Inject
-    lateinit var playerManager: RadioManager
+
     private var binding: MiniPlayerBinding
     var playOrPauseBtn:ImageButton
 
@@ -35,30 +33,16 @@ class MiniPlayer@JvmOverloads constructor(
         binding.channelImg.load(curChannelImage)
         binding.channelNameTxt.text = curChannelName
 
-        //play URI using exoplayer
-
-        if (curChannelUri != null) {
-            playerManager.initializePlayer(curChannelUri)
-            binding.exoPause.setImageResource(R.drawable.play)
-        }
+        play()
     }
 
-    private fun updateStatus(state:String){
-        binding.statusTxt.text =  state
-        Log.d(TAG,state)
+    fun play(){
+        playOrPauseBtn.setImageResource(R.drawable.pause)
     }
 
-
-    fun playOrPause(){
-        if(playerManager.player.playWhenReady) {
-            playerManager.pause()
-            binding.exoPause.setImageResource(R.drawable.pause)
-        }else{
-            playerManager.play()
-            binding.exoPause.setImageResource(R.drawable.play)
-        }
+    fun pause(){
+        playOrPauseBtn.setImageResource(R.drawable.play)
     }
-
     init {
         // get the inflater service from the android system
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater

@@ -5,7 +5,6 @@ import com.google.android.exoplayer2.C
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.audio.AudioAttributes
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector
-import com.myradio.features.miniplayer.utils.RadioManager
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -45,6 +44,4 @@ object ExoplayerModule {
             setAudioAttributes(audioAttributes, true)
         }
 
-    @Provides
-    fun provideExoplayerManager(exoPlayer: ExoPlayer) = RadioManager(exoPlayer)
 }
