@@ -1,7 +1,10 @@
-package com.myradio.features.miniplayer.utils
+package com.myradio.features.miniplayer.viewmodel
 
 import android.text.TextUtils
-import com.google.android.exoplayer2.*
+import androidx.lifecycle.ViewModel
+import com.google.android.exoplayer2.C
+import com.google.android.exoplayer2.ExoPlayer
+import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.source.BaseMediaSource
 import com.google.android.exoplayer2.source.ProgressiveMediaSource
 import com.google.android.exoplayer2.source.dash.DashMediaSource
@@ -10,15 +13,30 @@ import com.google.android.exoplayer2.source.rtsp.RtspMediaSource
 import com.google.android.exoplayer2.source.smoothstreaming.SsMediaSource
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
 import com.google.android.exoplayer2.util.Util
+import com.myradio.features.miniplayer.utils.PlayerListener
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-private const val TAG = "RadioManager"
+@HiltViewModel
+class MiniPlayerViewModel @Inject constructor(
+    private var player: ExoPlayer
+) : ViewModel() {
 
-class RadioManager(val player: ExoPlayer) {
+     var isPlaying = false
+     var isFailure = false
 
+    lateinit var playerEvents: PlayerListener
 
-    private val playbackStateListener: Player.Listener = PlayerListener()
+    fun setPlayerEvents(onErrorEvent: () -> Unit = {}, onLoadingEvent: (Boolean) -> Unit = {}){
+        playerEvents = PlayerListener(onErrorEvent, onLoadingEvent)
+        player.addListener(playerEvents)
+    }
 
-    fun initializePlayer(uri: String) {
+    fun playNewStation(uri:String) {
+        isPlaying = true
+        isFailure = false
+
+        player.stop()
 
         val mediaItem = MediaItem.Builder()
             .setUri(uri)
@@ -31,19 +49,21 @@ class RadioManager(val player: ExoPlayer) {
         val currMediaSource = getMediaType(uri, httpDataSourceFactory, mediaItem)
 
         player.setMediaSource(currMediaSource)
-        player.addListener(playbackStateListener)
+
         player.seekToNextMediaItem()
         player.playWhenReady = true
 
         player.prepare()
+
     }
 
-
-    fun play() {
+    fun play() { // resume player
+        isPlaying = true
         player.playWhenReady = true
     }
 
     fun pause() {
+        isPlaying = false
         player.playWhenReady = false
     }
 
@@ -79,6 +99,5 @@ class RadioManager(val player: ExoPlayer) {
         }
     }
 
+
 }
-
-

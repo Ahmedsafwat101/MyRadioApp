@@ -63,7 +63,7 @@ dependencies {
     implementation("com.google.dagger:hilt-android:2.40")
     kapt("com.google.dagger:hilt-android-compiler:2.38.1")
 
-    
+
     // Coroutine Lifecycle Scopes
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.4.0"
@@ -84,6 +84,7 @@ dependencies {
 
     //ExoPlayer
     implementation 'com.google.android.exoplayer:exoplayer:2.16.0'
+    implementation 'com.google.android.exoplayer:extension-mediasession:2.16.0'
 
 }
 
