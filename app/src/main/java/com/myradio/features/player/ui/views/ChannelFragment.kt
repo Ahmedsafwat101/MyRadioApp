@@ -44,6 +44,10 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import android.content.Intent.getIntent
+import androidx.core.content.ContextCompat
+import com.myradio.features.miniplayer.ui.views.MediaPlaybackService
+
 
 @AndroidEntryPoint
 class ChannelFragment : Fragment() {
@@ -60,6 +64,12 @@ class ChannelFragment : Fragment() {
     private lateinit var notificationManager: NotificationManagerCompat
 
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        Log.d(TAG,"Create")
+    }
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -71,12 +81,13 @@ class ChannelFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
+        Log.d(TAG,"onViewCreated")
         setUpRecyclerView()
         intiListener()
         subscribeObserver()
-        createNotificationChannel()
+        //createNotificationChannel()
 
-        notificationManager = NotificationManagerCompat.from(requireContext())
+       // notificationManager = NotificationManagerCompat.from(requireContext())
 
         //Control Play and Pause
         binding.minPlayer.playOrPauseBtn.setOnClickListener {
@@ -159,14 +170,16 @@ class ChannelFragment : Fragment() {
         )
 
         Log.d(TAG, "CLICKED")
+        startService()
 
-        lifecycleScope.launch {
+       /* lifecycleScope.launch {
             notification = buildNotification(
-                convertFromUriToBitmap(currImg.toString())
+                convertFromUriToBitmap(currImg.toString()), pos
             )
             notificationManager.notify(NOTIFICATION_ID, notification)
 
-        }
+        }*/
+
     }
 
 
@@ -215,7 +228,8 @@ class ChannelFragment : Fragment() {
     }
 
 
-    private fun buildNotification(bitmap: Bitmap?): Notification {
+    private fun buildNotification(bitmap: Bitmap?, pos: Int): Notification {
+
 
         val bigPicStyle = NotificationCompat.BigPictureStyle()
             .bigPicture(bitmap)
@@ -240,7 +254,7 @@ class ChannelFragment : Fragment() {
             requireContext(),
             NOTIFICATION_ID,
             contentIntent,
-            PendingIntent.FLAG_UPDATE_CURRENT
+            PendingIntent.FLAG_NO_CREATE
         )
 
     }
@@ -254,6 +268,21 @@ class ChannelFragment : Fragment() {
         return (result as BitmapDrawable).bitmap
     }
 
+    private fun startService() {
+        val serviceIntent = Intent(requireContext(), MediaPlaybackService::class.java)
+        serviceIntent.putExtra("inputExtra", "sss")
+        ContextCompat.startForegroundService(requireContext(), serviceIntent)
+    }
+    private fun stopService() {
+        val serviceIntent = Intent(requireContext(), MediaPlaybackService::class.java)
+        MediaPlaybackService().stopService()
+    }
+
+
+    override fun onDestroy() {
+        super.onDestroy()
+        stopService()
+    }
 
 }
 
