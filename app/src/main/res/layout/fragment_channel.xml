@@ -40,7 +40,7 @@
             android:elevation="50dp"
             app:strokeColor="@color/black"
             app:strokeWidth="2dp"
-            android:visibility="gone"
+            android:visibility="visible"
             >
 
             <com.myradio.features.miniplayer.ui.views.MiniPlayer
