@@ -19,26 +19,27 @@ class MiniPlayerViewModel @Inject constructor(
 
     private val playbackState = SingleLiveEvent<Int>()
 
+
     fun getPlaybackState() = playbackState
 
 
-     var isPlaying = false
-     var isFailure = false
+    var isPlaying = false
+    var isFailure = false
 
     lateinit var playerEvents: PlayerListener
 
 
-    fun setPlayerEvents(){
+    fun setPlayerEvents() {
         playerEvents = PlayerListener(::getPlayerState)
         player.addListener(playerEvents)
     }
 
-    private fun getPlayerState(state:Int) {
+    private fun getPlayerState(state: Int) {
         playbackState.postValue(state)
     }
 
 
-    fun playNewStation(uri:String) {
+    fun playNewStation(uri: String) {
         isPlaying = true
         isFailure = false
 
@@ -60,7 +61,6 @@ class MiniPlayerViewModel @Inject constructor(
         player.playWhenReady = true
 
         player.prepare()
-
     }
 
     fun play() { // resume player

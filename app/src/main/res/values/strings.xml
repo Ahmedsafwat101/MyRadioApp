@@ -2,4 +2,9 @@
     <string name="app_name">MyRadio</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="CHANNEL_ID">"Radio"</string>
+    <string name="CHANNEL_NAME">RadioChannel</string>
+    <string name="notification_title">Title</string>
+
 </resources>
+
