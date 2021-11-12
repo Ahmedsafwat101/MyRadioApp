@@ -7,6 +7,7 @@ import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
 import com.myradio.features.miniplayer.utils.PlayerListener
 import com.myradio.features.miniplayer.utils.PlayerManager
+import com.myradio.utils.SingleLiveEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -16,7 +17,7 @@ class MiniPlayerViewModel @Inject constructor(
 ) : ViewModel() {
 
 
-    private val playbackState: MutableLiveData<Int> = MutableLiveData<Int>()
+    private val playbackState = SingleLiveEvent<Int>()
 
     fun getPlaybackState() = playbackState
 
