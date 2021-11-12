@@ -7,42 +7,17 @@ import com.google.android.exoplayer2.Player
 
 private const val TAG = "PlayerListener"
 
-class PlayerListener(val onErrorEvent: () -> Unit, val onLoadingEvent: (Boolean) -> Unit) :Player.Listener {
+class PlayerListener(val getPlayerState: (Int) -> Unit) :Player.Listener {
     override fun onPlaybackStateChanged(playbackState: Int) {
-        when (playbackState) {
-            ExoPlayer.EVENT_PLAYER_ERROR -> {
-                Log.d(TAG, "ExoPlayer.Error -")
-            }
-            ExoPlayer.STATE_IDLE -> {
-                Log.d(TAG, "ExoPlayer.STATE_IDLE      -")
-                onLoadingEvent(false)
 
-            }
-            ExoPlayer.STATE_BUFFERING -> {
-                Log.d(TAG, "ExoPlayer.STATE_BUFFERING -")
-                onLoadingEvent(true)
+        getPlayerState(playbackState)
 
-            }
-            ExoPlayer.STATE_READY -> {
-                Log.d(TAG, "ExoPlayer.STATE_READY     -")
-                onLoadingEvent(false)
-
-            }
-            ExoPlayer.STATE_ENDED -> {
-                Log.d(TAG, "STATE_ENDED             -")
-                onLoadingEvent(false)
-
-            }
-            else -> {
-                Log.d(TAG, "UNKNOWN_STATE             -")
-                onLoadingEvent(false)
-
-            }
-        }
     }
 
     override fun onPlayerError(error: PlaybackException) {
-        onLoadingEvent(false)
-        onErrorEvent()
+       /*
+        Actually I will not put any logic here for now because after triggering this call fun
+        the playback state will be ideal so we can listen for this state instead
+        */
     }
 }
