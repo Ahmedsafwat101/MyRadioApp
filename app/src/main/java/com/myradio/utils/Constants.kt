@@ -9,5 +9,7 @@ object Constants {
     const val VERBOSE_NOTIFICATION_CHANNEL_DESCRIPTION=""
     const val NOTIFICATION_TITLE="Radio App"
     const val NOTIFICATION_MESSAGE = "Radio is working..."
+    const val OUTPUT_PATH = "radio_record_outputs"
+
 
 }

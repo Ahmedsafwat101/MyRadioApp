@@ -5,16 +5,12 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.os.Build
-import android.util.Log
 import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
 import com.myradio.R
 import com.myradio.utils.Constants.CHANNEL_ID
 import com.myradio.utils.Constants.CHANNEL_NAME
-import com.myradio.utils.Constants.NOTIFICATION_ID
 import com.myradio.utils.Constants.NOTIFICATION_TITLE
 import com.myradio.utils.Constants.VERBOSE_NOTIFICATION_CHANNEL_DESCRIPTION
-import com.myradio.utils.Constants.VERBOSE_NOTIFICATION_CHANNEL_NAME
 
 private const val  TAG = "NotificationHelper"
 object NotificationHelper {
