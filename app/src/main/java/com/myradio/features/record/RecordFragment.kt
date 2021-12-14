@@ -1,6 +1,7 @@
 package com.myradio.features.record
 
 import android.annotation.SuppressLint
+import android.app.AlarmManager
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -10,10 +11,16 @@ import android.view.ViewGroup
 import com.myradio.databinding.FragmentRecordBinding
 
 import android.app.TimePickerDialog
+import android.content.Context
 import android.widget.TextView
+import androidx.core.content.getSystemService
 import com.myradio.utils.DisplayHelper
 import com.myradio.utils.DisplayHelper.showTimePicker
 import java.util.*
+import android.content.Intent
+import android.app.PendingIntent
+import android.os.Build
+import androidx.annotation.RequiresApi
 
 
 private const val TAG = "RecordFragment"
@@ -21,6 +28,8 @@ private const val TAG = "RecordFragment"
 class RecordFragment : Fragment() {
 
     private lateinit var binding: FragmentRecordBinding
+    private lateinit var alarmManager: AlarmManager
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -31,6 +40,7 @@ class RecordFragment : Fragment() {
     }
 
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
 
@@ -44,6 +54,20 @@ class RecordFragment : Fragment() {
             showTimePicker(binding.endTimeTxt,requireActivity())
         }
 
+
+        binding.startReminderBtn.setOnClickListener {
+            val context = requireActivity()
+
+            val intent = Intent(context,AlarmRadioRecordReceiver::class.java)
+            val pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0)
+            alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+            alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP,1000*30,pendingIntent)
+
+        }
+
+        binding.stopReminderBtn.setOnClickListener {
+
+        }
 
     }
 
